@@ -13,6 +13,8 @@ if (!file.exists("./UCIHARDataSet.zip")) {
         # Unzip the data. Overwrite any files that might already exist with the
         # same names to make sure the data we downloaded remains consistent
         unzip("./UCIHARDataSet.zip", overwrite = TRUE)
+
+        rm(fileURL)
 }
 
 # Read in the following files:
@@ -42,6 +44,9 @@ X_test <- read.table("./test/X_test.txt")
 y_test <- read.table("./test/y_test.txt", col.names = "activityid")
 
 testdataset <- data.table(subject_test, X_test, y_test)
+rm(subject_test)
+rm(X_test)
+rm(y_test)
 
 # Training data set
 subject_train <- read.table("./train/subject_train.txt", col.names = "subjectid")
@@ -52,15 +57,36 @@ y_train <- read.table("./train/y_train.txt", col.names = "activityid")
 
 traindataset <- data.table(subject_train, X_train, y_train)
 
+rm(subject_train)
+rm(X_train)
+rm(y_train)
+
 setwd("..")
 
 # Merge the training and test sets into one data set
 dataset <- rbind(traindataset, testdataset)
 
+rm(traindataset)
+rm(testdataset)
+
 # Extract only the measurements on the mean and standard deviation for each
 # measurement
+desiredmeasurements <- grepl("((M|m)ean)|((S|s)td)", features$measurementname)
+measurementNames <- features$measurementname[desiredmeasurements]
+
+# We want to keep the first and last columns (the subject ids and the activity
+# ids), so add 2 more TRUES to desired measurement - 1 at beginning and 1 at end
+desiredmeasurements <- c(TRUE, desiredmeasurements, TRUE)
+
+dataset <- dataset[,desiredmeasurements, with = FALSE]
+
+rm(desiredmeasurements)
+rm(features)
 
 # Use descriptive activity names to name the activities in the data set
+dataset[["activityid"]] <- activity_labels[match(dataset[['activityid']],
+                                                 activity_labels[['activityid']]),
+                                           'activitydescription']
 
 # Appropriately label the data set with descriptive variable names
 
