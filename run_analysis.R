@@ -142,3 +142,5 @@ outputdataset <- outputdataset %>%
 
 # Write tidy data set to text file with write.table using row.name = FALSE
 write.table(outputdataset, "./outputdataset.txt", row.names = FALSE)
+cat("Full data table written out to outputdataset.txt in the same directory",
+    "as this script was run from")
