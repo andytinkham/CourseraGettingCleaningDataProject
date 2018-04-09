@@ -15,6 +15,18 @@ a new data set providing the average of each variable for each activity and
 each subject. See the [Code Book](CodeBook.md) file for more information on 
 the output data set.
 
+When the data is made tidy, it conforms to the definition of tidy data put forth
+by Hadley Wickham in his [Tidy Data paper](https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf).
+* Each variable forms a column
+* Each observation forms a row
+* Each type of observational unit forms a table
+
+**NOTE**: The data set output by this script uses the narrow form of tidy data.
+The grading instructions specifically say this is OK. I chose to use narrow form
+after reading that many packages require long-format data instead of wide-format.
+See Sean Anderson's [blog post](http://seananderson.ca/2013/10/19/reshape/) on 
+reshape for more details.
+
 ## Files
 Included in this repository are 6 files:
 * .gitignore -- keeps the source data from being checked in
@@ -22,7 +34,8 @@ Included in this repository are 6 files:
 * GettingCleaningDataProject.Rproj -- the RStudio project file
 * README.md -- This file. Describes the project
 * outputdataset.txt -- The data set described in the CodeBook.md file. It was 
-   output using R's write.table function with row.names = FALSE specified
+   output using R's write.table function with row.names = FALSE specified. This
+   dataset uses the narrow form
 * run_analysis.R -- The R script that actually retrieves the data, manipulates
    it and generates the outputted data set
    
