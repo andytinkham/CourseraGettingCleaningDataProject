@@ -57,4 +57,6 @@ script.
 ## Acknowledgments
 * All the people posting in the course forums, and particularly the course mentors
 * David Hood, for his long and useful [post](https://thoughtfulbloke.wordpress.com/2015/09/09/getting-and-cleaning-the-assignment/) 
-of advice for the course
+  of advice for the course
+* Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra, and Jorge L. Reyes-Ortiz
+  for gathering the data.
